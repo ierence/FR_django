@@ -3,7 +3,6 @@ from drf_spectacular.utils import extend_schema
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-
 from .serializers import (ClientCreateSerializer, ClientOutputSerializer,
                           ClientUpdateSerializer)
 from .services import client_create, client_destroy, client_update

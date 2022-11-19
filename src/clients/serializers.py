@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.serializers import UUIDSerializertMixin, CreateUpdateSerializerMixin
+from core.serializers import CreateUpdateSerializerMixin, UUIDSerializertMixin
 
 
 class ClientCreateSerializer(serializers.Serializer):
@@ -9,7 +9,7 @@ class ClientCreateSerializer(serializers.Serializer):
     tags = serializers.ListField(
         child=serializers.CharField()
     )
-    
+
 
 class ClientOutputSerializer(UUIDSerializertMixin, CreateUpdateSerializerMixin):
     phone_number = serializers.CharField()

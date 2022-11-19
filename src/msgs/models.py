@@ -1,9 +1,8 @@
 from django.db import models
 
-from core.models import BaseModel, NumericIDMixin
-
-from mailings.models import MailingList
 from clients.models import Client
+from core.models import BaseModel, NumericIDMixin
+from mailings.models import MailingList
 
 
 class Message(NumericIDMixin, BaseModel):
@@ -19,7 +18,8 @@ class Message(NumericIDMixin, BaseModel):
         (EXPIRED, "expired")
     )
 
-    status = models.CharField(choices=STATUSES, max_length=2, default=SCHEDULED)
+    status = models.CharField(
+        choices=STATUSES, max_length=2, default=SCHEDULED)
     sent_at = models.DateTimeField("Отправлено в.", null=True, default=None)
     mailing_list = models.ForeignKey(
         to=MailingList, related_name="messages", on_delete=models.CASCADE)

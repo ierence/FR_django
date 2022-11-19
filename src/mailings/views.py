@@ -1,18 +1,17 @@
 from drf_spectacular.openapi import OpenApiResponse
 from drf_spectacular.utils import extend_schema
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.decorators import action
-
 
 from .serializers import (MailingListCreateSerializer,
                           MailingListOutputSerializer,
                           MailingListRecordOutputSerializer,
                           MailingListsRecordOutputSerializer,
                           MailingListUpdateSerializer)
-from .services import (mailing_list_create, mailing_list_destroy,
-                       mailing_list_statistics, mailing_list_update,
-                       mailing_lists_statisctics, force_all_sends)
+from .services import (force_all_sends, mailing_list_create,
+                       mailing_list_destroy, mailing_list_statistics,
+                       mailing_list_update, mailing_lists_statisctics)
 
 
 class MailingListViewSet(GenericViewSet):
@@ -59,7 +58,6 @@ class MailingListViewSet(GenericViewSet):
         mailing_list_destroy(id)
 
         return Response(data="Рассылка удалёна.", status=204)
-
 
     @extend_schema(
         summary="Форсирует создание и отправку сообщений для всех рассылок.",

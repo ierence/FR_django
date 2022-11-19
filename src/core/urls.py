@@ -14,13 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-
+from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from clients.router import urlpatterns as clients_urls
 from mailings.router import urlpatterns as mailings_url
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),

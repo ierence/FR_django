@@ -1,8 +1,8 @@
 import re
 
-from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
+from django.db import models
 from timezone_field import TimeZoneField
 
 from core.models import BaseModel
