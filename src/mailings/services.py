@@ -93,6 +93,8 @@ def mailing_list_update(pk, **update_data):
 
     mailing_list.save()
 
+    return mailing_list
+
 
 def mailing_lists_statisctics():
     mailing_lists_report = MailingListsReport()
