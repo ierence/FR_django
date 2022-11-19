@@ -37,14 +37,14 @@ class MailingListViewSet(GenericViewSet):
         request=MailingListUpdateSerializer,
         responses={201: MailingListOutputSerializer}
     )
-    def update(self, request, id):
+    def update(self, request, pk):
         self.serializer_class = MailingListUpdateSerializer
         self.output_serializer_class = MailingListOutputSerializer
 
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        mailing_list = mailing_list_update(id, **serializer.validated_data)
+        mailing_list = mailing_list_update(pk, **serializer.validated_data)
         output_serializer = self.output_serializer_class(mailing_list)
 
         return Response(data=output_serializer.data, status=201)
@@ -54,8 +54,8 @@ class MailingListViewSet(GenericViewSet):
         request=None,
         responses={204: OpenApiResponse(description="Рассылка удалена.")}
     )
-    def destroy(self, request, id):
-        mailing_list_destroy(id)
+    def destroy(self, request, pk):
+        mailing_list_destroy(pk)
 
         return Response(data="Рассылка удалёна.", status=204)
 
@@ -88,10 +88,10 @@ class MailingListStatsViewSet(GenericViewSet):
         summary="Детальная статистика по сообщениям одной рассылки.",
         responses={200: MailingListRecordOutputSerializer}
     )
-    def retrieve(self, request, id):
+    def retrieve(self, request, pk):
         self.serializer_class = MailingListRecordOutputSerializer
 
-        record = mailing_list_statistics(id)
+        record = mailing_list_statistics(pk)
         serializer = self.serializer_class(record)
 
         return Response(data=serializer.data, status=200)

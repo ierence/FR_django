@@ -34,5 +34,5 @@ class Client(BaseModel):
         # Валидация кода оператора
         if self.phone_number[1:4] != self.service_provider_code:
             raise ValidationError(
-                "Код иобильного оператора не совпадает с указанным в номере телефона."
+                "Код мобильного оператора не совпадает с указанным в номере телефона."
             )

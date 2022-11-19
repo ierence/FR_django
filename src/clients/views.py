@@ -48,8 +48,8 @@ class ClientViewSet(GenericViewSet):
         request=None,
         responses={204: OpenApiResponse(description="Клиент удален.")}
     )
-    def destroy(self, request, id):
+    def destroy(self, request, pk):
 
-        client_destroy(pk=id)
+        client_destroy(pk=pk)
 
         return Response(data="Клиент удалён.", status=204)
