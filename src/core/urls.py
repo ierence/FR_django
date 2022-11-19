@@ -24,7 +24,6 @@ from mailings.router import urlpatterns as mailings_url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
 
 urlpatterns += [
