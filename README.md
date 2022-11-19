@@ -2,6 +2,10 @@
 - docker compose
 
 # Запуск сервисов
+Склонировать репозиторий с помощью команды:
+```
+git clone https://github.com/ierence/FR_django.git
+```
 Сервис может быть запущен с помощью команды
 ```
 docker-compose up
