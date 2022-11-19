@@ -87,7 +87,7 @@ def mailing_list_destroy(pk):
 def mailing_list_update(pk, **update_data):
     mailing_list = MailingList.objects.get(pk=pk)
 
-    for key, value in update_data:
+    for key, value in update_data.items():
         setattr(mailing_list, key, value)
 
     mailing_list.save()
