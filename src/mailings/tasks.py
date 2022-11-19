@@ -43,13 +43,18 @@ def create_messages_for_mailing_list(mailing_list: MailingList):
     clients = Client.objects.prefetch_related('messages__mailing_list').exclude(
         messages__mailing_list__id=mailing_list.id).distinct()
 
-    privider_q = Q(service_provider_code__contains=mailing_list.filter_tags)
+    provider_q = Q(service_provider_code__contains=mailing_list.filter_tags)
+    any_tags_q = Q(tags__contains=mailing_list.filter_tags) | provider_q
+    all_tags_q = q = reduce(operator.and_, (Q(tags__contains=[
+        tag]) for tag in mailing_list.filter_tags)) & provider_q
+
+    q = None
+
     # отфильтровать клиентов, которым необходимы сообщения
     if mailing_list.tag_filtering_mode == MailingList.ANY:
-        q = Q(tags__contains=mailing_list.filter_tags) | privider_q
+        q = any_tags_q
     elif mailing_list.tag_filtering_mode == MailingList.ALL:
-        q = reduce(operator.and_, (Q(tags__contains=[
-                   tag]) for tag in mailing_list.filter_tags)) & privider_q
+        q = all_tags_q
 
     clients = clients.filter(q)
     # создать новые сообщения
